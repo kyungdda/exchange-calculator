@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환율 계산기</title>
+    <script>
+        async function convertCurrency() {
+            const amount = document.getElementById("amount").value;
+            const response = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+            const data = await response.json();
+            const rate = data.rates.KRW;
+            document.getElementById("result").innerText = `KRW: ${(amount * rate).toFixed(2)}원`;
+        }
+    </script>
+</head>
+<body>
+    <h2>환율 계산기</h2>
+    <input type="number" id="amount" placeholder="달러 입력">
+    <button onclick="convertCurrency()">변환</button>
+    <p id="result"></p>
+</body>
+</html>
